@@ -1,0 +1,181 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Testing an API",
+    "description": "Testing an aPaaS API",
+    "contact": {},
+    "version": "0.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://ark-education-app-apaasworkshop.apps-t-h2.fw.garanti.com.tr/edu/v1"
+    }
+  ],
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "paths": {
+    "/status": {
+      "get": {
+        "summary": "get a test API",
+        "description": "get parameters of tested API",
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "header",
+            "description": "Guid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userid",
+            "in": "header",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dialect",
+            "in": "header",
+            "description": " TR (Turkish) , EN (English) , RO (Romanca)",
+            "required": true,
+            "schema": {
+              "maxLength": 2,
+              "minLength": 2,
+              "type": "string"
+            }
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "application/json , application/xml",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "application/json , application/xml",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ip",
+            "in": "header",
+            "description": "End User Client IP",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "application/json , application/xml",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commonResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commonResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commonResult"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commonResult"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commonResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commonResult"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-codegen-request-body-name": "body"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "commonResult": {
+        "title": "result",
+        "type": "object",
+        "properties": {
+          "returnCode": {
+            "type": "integer",
+            "description": "1 is Success, 0 is Fail",
+            "format": "int32"
+          },
+          "reasonCode": {
+            "type": "string",
+            "description": "Default value is 1 (Success). When the service has any error, this field should be used. http Error Codes or Business Error Codes"
+          },
+          "messageText": {
+            "type": "string",
+            "description": "Return message text"
+          }
+        }
+      }
+    }
+  }
+}
